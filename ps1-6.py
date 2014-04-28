@@ -30,6 +30,7 @@ def main():
 # globals
 breakpoints = {9: True}
 stepping = False
+# watchpoints = {}
 
 """ *** INSTRUCTIONS ***
 Improve and expand this function to accept 
@@ -50,6 +51,15 @@ a breakpoint command 'b <line>'.
 Add the line number to the breakpoints dictionary
 or print 'You must supply a line number' 
 if 'b' is not followed by a line number.
+"""
+
+"""
+Our debug function
+Improve and expand the debug function to accept 
+a watchpoint command 'w <var name>'.
+Add the variable name to the watchpoints dictionary
+or print 'You must supply a variable name' 
+if 'w' is not followed by a string.
 """
 
 def debug(command, my_locals):
@@ -73,6 +83,9 @@ def debug(command, my_locals):
     elif command.startswith('b'):    # breakpoint         
         # YOUR CODE HERE
         add_bp(arg)
+    elif command.startswith('w'):    # watch variable
+        # YOUR CODE HERE
+        add_wp(arg)
     elif command.startswith('q'):   # quit
         sys.exit(0)
     else:
@@ -81,7 +94,9 @@ def debug(command, my_locals):
     return False
 
 # commands = ["p", "s", "p tag", "p foo", "q"]
-commands = ["b 5", "c", "c", "q"]
+# commands = ["b 5", "c", "c", "q"]
+commands = ["w out", "c", "c", "c", "c", "c", "c", "q"]
+
 
 def input_command():
     #command = raw_input("(my-spyder) ")
@@ -120,13 +135,29 @@ def add_bp(arg):
     else:
         breakpoints.update({int(arg): True})
 
+def add_wp(arg):
+    # add the line number *arg* to the breakpoints list
+    global watchpoints
+
+    if arg is None:
+        print 'You must supply a variable name'
+    else:
+        watchpoints.update({arg: True})
+
 # Using the tracer
 # sys.settrace(traceit)
 # main()
 # sys.settrace(None)
 
-#Simple test 
-print breakpoints
-debug("b 5", {'quote': False, 's': 'xyz', 'tag': False, 'c': 'b', 'out': ''})
-print breakpoints == {9: True, 5: True}
-#>>> True
+# #Simple test
+# print breakpoints
+# debug("b 5", {'quote': False, 's': 'xyz', 'tag': False, 'c': 'b', 'out': ''})
+# print breakpoints == {9: True, 5: True}
+# #>>> True
+
+#Simple test
+print watchpoints
+debug("w s", {'s': 'xyz', 'tag': False})
+print watchpoints
+#>>> {'c': True}
+#>>> {'c': True, 's': True}
