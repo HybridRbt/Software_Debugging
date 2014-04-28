@@ -59,7 +59,7 @@ def debug(command, my_locals):
         return True
     elif command.startswith('p'):    # print 
         # YOUR CODE HERE
-        print_dic(arg)
+        print_dic(arg, my_locals)
     elif command.startswith('q'):   # quit
         sys.exit(0)
     else:
@@ -87,13 +87,13 @@ def traceit(frame, event, trace_arg):
                 resume = debug(command, frame.f_locals)
     return traceit
 
-def print_dic(arg):
+def print_dic(arg, my_locals):
     # print the whole dic if no arg; otherwise print corresponding variable.
-    dic = {'quote': quote, 's': s, 'tag': tag, 'c': c, 'out': out}
     if arg is None:
-        print dic
+        print my_locals
     else:
-        print arg + " = " + repr(dic[arg])
+        if my_locals.has_key(arg):
+            print arg + " = " + repr(my_locals[arg])
 
 # Using the tracer
 sys.settrace(traceit)
