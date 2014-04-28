@@ -57,7 +57,7 @@ def debug(command, my_locals):
     elif command.startswith('c'):   # continue
         stepping = False
         return True
-    elif command.startswith('p')    # print 
+    elif command.startswith('p'):    # print 
         # YOUR CODE HERE
         print_dic(arg)
     elif command.startswith('q'):   # quit
