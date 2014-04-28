@@ -88,7 +88,13 @@ def traceit(frame, event, trace_arg):
     return traceit
 
 def print_dic(arg):
-    
+    # print the whole dic if no arg; otherwise print corresponding variable.
+    dic = {'quote': quote, 's': s, 'tag': tag, 'c': c, 'out': out}
+    if arg is None:
+        print dic
+    else:
+        print arg + " = " + repr(dic[arg])
+
 # Using the tracer
 sys.settrace(traceit)
 main()
