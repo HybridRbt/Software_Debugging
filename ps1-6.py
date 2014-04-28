@@ -42,6 +42,16 @@ the 'p' is followed by an argument,
 or print 'No such variable:', arg
 if no such variable exists.
 """
+
+"""
+Our debug function
+Improve and expand this function to accept 
+a breakpoint command 'b <line>'.
+Add the line number to the breakpoints dictionary
+or print 'You must supply a line number' 
+if 'b' is not followed by a line number.
+"""
+
 def debug(command, my_locals):
     global stepping
     global breakpoints
@@ -60,6 +70,9 @@ def debug(command, my_locals):
     elif command.startswith('p'):    # print 
         # YOUR CODE HERE
         print_dic(arg, my_locals)
+    elif command.startswith('b'):    # breakpoint         
+        # YOUR CODE HERE
+        add_bp(arg)
     elif command.startswith('q'):   # quit
         sys.exit(0)
     else:
@@ -67,7 +80,8 @@ def debug(command, my_locals):
         
     return False
 
-commands = ["p", "s", "p tag", "p foo", "q"]
+# commands = ["p", "s", "p tag", "p foo", "q"]
+commands = ["b 5", "c", "c", "q"]
 
 def input_command():
     #command = raw_input("(my-spyder) ")
@@ -97,7 +111,22 @@ def print_dic(arg, my_locals):
         else:
             print "No such variable: " + arg
 
+def add_bp(arg):
+    # add the line number *arg* to the breakpoints list
+    global breakpoints
+
+    if arg is None:
+        print 'You must supply a line number'
+    else:
+        breakpoints['arg'] = True
+
 # Using the tracer
-sys.settrace(traceit)
-main()
-sys.settrace(None)
+# sys.settrace(traceit)
+# main()
+# sys.settrace(None)
+
+#Simple test 
+print breakpoints
+debug("b 5", {'quote': False, 's': 'xyz', 'tag': False, 'c': 'b', 'out': ''})
+print breakpoints == {9: True, 5: True}
+#>>> True
