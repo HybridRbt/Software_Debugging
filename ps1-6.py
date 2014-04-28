@@ -94,6 +94,8 @@ def print_dic(arg, my_locals):
     else:
         if my_locals.has_key(arg):
             print arg + " = " + repr(my_locals[arg])
+        else:
+            print "No such variable: " + arg
 
 # Using the tracer
 sys.settrace(traceit)
