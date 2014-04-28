@@ -118,7 +118,7 @@ def add_bp(arg):
     if arg is None:
         print 'You must supply a line number'
     else:
-        breakpoints['arg'] = True
+        breakpoints.update({arg: True})
 
 # Using the tracer
 # sys.settrace(traceit)
