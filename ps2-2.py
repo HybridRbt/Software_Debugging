@@ -55,7 +55,7 @@ class Range:
             self.max = max(self.max, value)
 
         self.type = type(v_type)
-        self.set = v_set
+        self.set = sorted(v_set, key=abs)
 
     # def __repr__(self):
     #     return repr(self.min) + ".." + repr(self.max)
@@ -112,8 +112,7 @@ class Invariants:
                     s += event + " " + function + ":\n"
 
                     for var, range in vars.iteritems():
-                        s += "    assert isinstance(" + var + ", type(" + str(
-                            range.set[random.randrange(0, len(range.set))]) + "))\n"  # YOUR CODE
+                        s += "    assert isinstance(" + var + ", type(" + str(range.set[-1]) + "))\n"  # YOUR CODE
                         s += "    assert " + var + " in set(" + str(range.set) + ")\n"
                         s += "    assert "
                         if range.min == range.max:
@@ -156,7 +155,7 @@ def traceit(frame, event, arg):
 sys.settrace(traceit)
 # Tester. Increase the range for more precise results when running locally
 eps = 0.000001
-test_vars = [34.6363, 9.348, -293438.402]
+test_vars = [3, 0, -10]
 for i in test_vars:
     #for i in range(1, 10):
     z = double(i)
