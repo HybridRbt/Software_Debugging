@@ -12,18 +12,22 @@ import sys
 import math
 import random
 from collections import defaultdict   # inspired from the forum
+from collections import defaultdict  # inspired from the forum
 
-def square_root(x, eps = 0.00001):
+
+def square_root(x, eps=0.00001):
     assert x >= 0
     y = math.sqrt(x)
     assert abs(square(y) - x) <= eps
     return y
+
 
 # def square(x):
 #     return x * x
 
 def double(x):
     return abs(20 * x) + 10
+
 
 # The Range class tracks the types and value ranges for a single variable.
 class Range:
@@ -53,7 +57,7 @@ class Range:
 
         self.type = type(v_type)
         self.set = v_set
-            
+
     # def __repr__(self):
     #     return repr(self.min) + ".." + repr(self.max)
 
@@ -67,8 +71,8 @@ class Invariants:
         # Mapping (Function Name) -> (Event type) -> (Variable Name)
         # e.g. self.vars["sqrt"]["call"]["x"] = Range()
         # holds the range for the argument x when calling sqrt(x)
-        self.vars = defaultdict(lambda: defaultdict(lambda: defaultdict(Range)))   # inspired from the forum
-        
+        self.vars = defaultdict(lambda: defaultdict(lambda: defaultdict(Range)))  # inspired from the forum
+
     def track(self, frame, event, arg):
         if event == "call" or event == "return":
             # YOUR CODE HERE. 
