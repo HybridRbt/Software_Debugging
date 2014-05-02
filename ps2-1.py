@@ -29,6 +29,8 @@ class Range:
     # Invoke this for every value
     def track(self, value):
         # YOUR CODE
+        self.min = min(self.min, value)
+        self.max = max(self.max, value)
             
     def __repr__(self):
         return repr(self.min) + ".." + repr(self.max)
