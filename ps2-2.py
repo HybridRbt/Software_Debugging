@@ -124,13 +124,13 @@ class Invariants:
                     # RELATIONS SHOULD BE ONE OF: ==, <=, >=
                     if var == "x":
                         s += "    assert " + var + " <= " + "ret" + "\n"
-                        s += "    assert " + var + " <= " + "z" + "\n"
-                    elif var == "z":
-                        s += "    assert " + var + " >= " + "x" + "\n"
-                        s += "    assert " + var + " == " + "ret" + "\n"
-                    elif var == "ret":
-                        s += "    assert " + var + " >= " + "x" + "\n"
-                        s += "    assert " + var + " == " + "z" + "\n"
+                    #     s += "    assert " + var + " <= " + "z" + "\n"
+                    # elif var == "z":
+                    #     s += "    assert " + var + " >= " + "x" + "\n"
+                    #     s += "    assert " + var + " == " + "ret" + "\n"
+                    # elif var == "ret":
+                    #     s += "    assert " + var + " >= " + "x" + "\n"
+                    #     s += "    assert " + var + " == " + "z" + "\n"
 
         return s
 
