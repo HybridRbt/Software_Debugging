@@ -108,29 +108,30 @@ class Invariants:
         s = ""
         for function, events in self.vars.iteritems():
             for event, vars in events.iteritems():
-                s += event + " " + function + ":\n"
+                if event == "return":
+                    s += event + " " + function + ":\n"
 
-                for var, range in vars.iteritems():
-                    s += "    assert isinstance(" + var + ", type(" + str(
-                        range.set[random.randrange(0, len(range.set))]) + "))\n"  # YOUR CODE
-                    s += "    assert " + var + " in set(" + str(range.set) + ")\n"
-                    s += "    assert "
-                    if range.min == range.max:
-                        s += var + " == " + repr(range.min)
-                    else:
-                        s += repr(range.min) + " <= " + var + " <= " + repr(range.max)
-                    s += "\n"
-                    # ADD HERE RELATIONS BETWEEN VARIABLES
-                    # RELATIONS SHOULD BE ONE OF: ==, <=, >=
-                    if var == "x":
-                        s += "    assert " + var + " <= " + "ret" + "\n"
-                    #     s += "    assert " + var + " <= " + "z" + "\n"
-                    # elif var == "z":
-                    #     s += "    assert " + var + " >= " + "x" + "\n"
-                    #     s += "    assert " + var + " == " + "ret" + "\n"
-                    # elif var == "ret":
-                    #     s += "    assert " + var + " >= " + "x" + "\n"
-                    #     s += "    assert " + var + " == " + "z" + "\n"
+                    for var, range in vars.iteritems():
+                        s += "    assert isinstance(" + var + ", type(" + str(
+                            range.set[random.randrange(0, len(range.set))]) + "))\n"  # YOUR CODE
+                        s += "    assert " + var + " in set(" + str(range.set) + ")\n"
+                        s += "    assert "
+                        if range.min == range.max:
+                            s += var + " == " + repr(range.min)
+                        else:
+                            s += repr(range.min) + " <= " + var + " <= " + repr(range.max)
+                        s += "\n"
+                        # ADD HERE RELATIONS BETWEEN VARIABLES
+                        # RELATIONS SHOULD BE ONE OF: ==, <=, >=
+                        if var == "x":
+                            s += "    assert " + var + " <= " + "ret" + "\n"
+                        #     s += "    assert " + var + " <= " + "z" + "\n"
+                        # elif var == "z":
+                        #     s += "    assert " + var + " >= " + "x" + "\n"
+                        #     s += "    assert " + var + " == " + "ret" + "\n"
+                        # elif var == "ret":
+                        #     s += "    assert " + var + " >= " + "x" + "\n"
+                        #     s += "    assert " + var + " == " + "z" + "\n"
 
         return s
 
