@@ -90,7 +90,7 @@ sys.settrace(traceit)
 # Tester. Increase the range for more precise results when running locally
 eps = 0.000001
 for i in range(1, 1000):
-    r = int(random.random() * 1000) # An integer value between 0 and 999.99
+    r = int(random.random() * 1000)  # An integer value between 0 and 999.99
     z = square_root(r, eps)
     z = square(z)
 sys.settrace(None)
