@@ -30,20 +30,17 @@ class Range:
     # def __init__(self):
     #     self.min = None  # Minimum value seen
     #     self.max = None  # Maximum value seen
+
     def __init__(self):
         self.min = None  # Minimum value seen
         self.max = None  # Maximum value seen
-
-    def __init__(self, test_set):
-        self.min = None  # Minimum value seen
-        self.max = None  # Maximum value seen
         self.type = None  # Type of variable
-        self.set = test_set  # Set of values taken
+        self.set = None  # Set of values taken
 
     # Invoke this for every value
-    def track(self, value):
+    def track(self, value, v_type, v_set):
         # YOUR CODE
-        # compare and store the min and max
+        # compare and store the min and max, type and set
         if self.min is None:
             self.min = value
         else:
@@ -53,12 +50,15 @@ class Range:
             self.max = value
         else:
             self.max = max(self.max, value)
+
+        self.type = type(v_type)
+        self.set = v_set
             
     # def __repr__(self):
     #     return repr(self.min) + ".." + repr(self.max)
 
-        def __repr__(self):
-            repr(self.type) + " " + repr(self.min) + ".." + repr(self.max)+ " " + repr(self.set)
+    def __repr__(self):
+        repr(self.type) + " " + repr(self.min) + ".." + repr(self.max) + " " + repr(self.set)
 
 
 # The Invariants class tracks all Ranges for all variables seen.
@@ -107,7 +107,7 @@ class Invariants:
                 s += event + " " + function + ":\n"
 
                 for var, range in vars.iteritems():
-                    s += "    assert isinstance(" + var + # YOUR CODE
+                    s += "    assert isinstance(" + var + ", " + range.type + ")"# YOUR CODE
                     s += "    assert "
                     if range.min == range.max:
                         s += var + " == " + repr(range.min)
