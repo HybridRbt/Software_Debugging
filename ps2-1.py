@@ -31,8 +31,15 @@ class Range:
     def track(self, value):
         # YOUR CODE
         # compare and store the min and max
-        self.min = min(self.min, value)
-        self.max = max(self.max, value)
+        if self.min == None:
+            self.min = value
+        else:
+            self.min = min(self.min, value)
+
+        if self.max == None:
+            self.max = value
+        else:
+            self.max = max(self.max, value)
             
     def __repr__(self):
         return repr(self.min) + ".." + repr(self.max)
