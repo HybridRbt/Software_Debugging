@@ -10,6 +10,7 @@
 import sys
 import math
 import random
+from collections import defaultdict   # inspired from the forum
 
 def square_root(x, eps = 0.00001):
     assert x >= 0
@@ -23,12 +24,13 @@ def square(x):
 # The Range class tracks the types and value ranges for a single variable.
 class Range:
     def __init__(self):
-        self.min  = None  # Minimum value seen
-        self.max  = None  # Maximum value seen
+        self.min = None  # Minimum value seen
+        self.max = None  # Maximum value seen
     
     # Invoke this for every value
     def track(self, value):
         # YOUR CODE
+        # compare and store the min and max
         self.min = min(self.min, value)
         self.max = max(self.max, value)
             
@@ -42,7 +44,6 @@ class Invariants:
         # Mapping (Function Name) -> (Event type) -> (Variable Name)
         # e.g. self.vars["sqrt"]["call"]["x"] = Range()
         # holds the range for the argument x when calling sqrt(x)
-        self.vars = {}
         self.vars = defaultdict(lambda: defaultdict(lambda: defaultdict(Range)))   # inspired from the forum
         
     def track(self, frame, event, arg):
@@ -52,7 +53,8 @@ class Invariants:
             # If the event is "return", the return value
             # is kept in the 'arg' argument to this function.
             # Use it to keep track of variable "ret" (return)
-    
+
+
     def __repr__(self):
         # Return the tracked invariants
         s = ""
@@ -80,7 +82,6 @@ def traceit(frame, event, arg):
 sys.settrace(traceit)
 # Tester. Increase the range for more precise results when running locally
 eps = 0.000001
-for i in range(1, 10):
 for i in range(1, 1000):
     r = int(random.random() * 1000) # An integer value between 0 and 999.99
     z = square_root(r, eps)
