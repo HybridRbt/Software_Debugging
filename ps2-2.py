@@ -125,7 +125,8 @@ class Invariants:
 
 
 invariants = Invariants()
-    
+
+
 def traceit(frame, event, arg):
     invariants.track(frame, event, arg)
     return traceit
@@ -145,7 +146,7 @@ sys.settrace(traceit)
 eps = 0.000001
 test_vars = [34.6363, 9.348, -293438.402]
 for i in test_vars:
-#for i in range(1, 10):
+    #for i in range(1, 10):
     z = double(i)
 sys.settrace(None)
 print invariants
