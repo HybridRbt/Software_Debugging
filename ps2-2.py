@@ -78,9 +78,12 @@ class Invariants:
             # Use it to keep track of variable "ret" (return)
             if event == "return":
                 self.vars[frame.f_code.co_name][event]['ret'].track(arg)
+                self.vars[frame.f_code.co_name][event]['ret'].track(arg, arg, test_vars)
 
             for each_item in frame.f_locals:
                 self.vars[frame.f_code.co_name][event][each_item].track(frame.f_locals[each_item])
+                self.vars[frame.f_code.co_name][event][each_item].track(frame.f_locals[each_item],
+                                                                        frame.f_locals[each_item], test_vars)
 
     # def __repr__(self):
     #     # Return the tracked invariants
