@@ -11,7 +11,6 @@
 import sys
 import math
 import random
-from collections import defaultdict   # inspired from the forum
 from collections import defaultdict  # inspired from the forum
 
 
