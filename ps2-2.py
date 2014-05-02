@@ -32,12 +32,12 @@ class Range:
     def track(self, value):
         # YOUR CODE
         # compare and store the min and max
-        if self.min == None:
+        if self.min is None:
             self.min = value
         else:
             self.min = min(self.min, value)
 
-        if self.max == None:
+        if self.max is None:
             self.max = value
         else:
             self.max = max(self.max, value)
