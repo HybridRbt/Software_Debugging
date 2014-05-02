@@ -111,7 +111,8 @@ class Invariants:
                 s += event + " " + function + ":\n"
 
                 for var, range in vars.iteritems():
-                    s += "    assert isinstance(" + var + ", " + range.type + ")"# YOUR CODE
+                    s += "    assert isinstance(" + var + ", " + str(range.type) + ")\n"  # YOUR CODE
+                    s += "    assert " + var + " in set(" + str(range.set) + ")\n"
                     s += "    assert "
                     if range.min == range.max:
                         s += var + " == " + repr(range.min)
@@ -120,7 +121,16 @@ class Invariants:
                     s += "\n"
                     # ADD HERE RELATIONS BETWEEN VARIABLES
                     # RELATIONS SHOULD BE ONE OF: ==, <=, >=
-                    s += "    assert " + var + " >= " + var2 + "\n"
+                    if var == "x":
+                        s += "    assert " + var + " <= " + "ret" + "\n"
+                        s += "    assert " + var + " <= " + "z" + "\n"
+                    elif var == "z":
+                        s += "    assert " + var + " >= " + "x" + "\n"
+                        s += "    assert " + var + " == " + "ret" + "\n"
+                    elif var == "ret":
+                        s += "    assert " + var + " >= " + "x" + "\n"
+                        s += "    assert " + var + " == " + "z" + "\n"
+
         return s
 
 
