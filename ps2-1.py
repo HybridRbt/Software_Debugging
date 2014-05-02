@@ -41,6 +41,7 @@ class Invariants:
         # e.g. self.vars["sqrt"]["call"]["x"] = Range()
         # holds the range for the argument x when calling sqrt(x)
         self.vars = {}
+        self.vars = defaultdict(lambda: defaultdict(lambda: defaultdict(Range)))   # inspired from the forum
         
     def track(self, frame, event, arg):
         if event == "call" or event == "return":
