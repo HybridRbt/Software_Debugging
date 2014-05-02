@@ -79,8 +79,8 @@ class Invariants:
             # If the event is "return", the return value
             # is kept in the 'arg' argument to this function.
             # Use it to keep track of variable "ret" (return)
-            if event == "return":
-                self.vars[frame.f_code.co_name][event]['ret'].track(arg, arg, test_vars)
+            # if event == "return":
+            #     self.vars[frame.f_code.co_name][event]['ret'].track(arg, arg, test_vars)
 
             for each_item in frame.f_locals:
                 self.vars[frame.f_code.co_name][event][each_item].track(frame.f_locals[each_item],
