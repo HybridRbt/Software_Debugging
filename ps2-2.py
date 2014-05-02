@@ -111,7 +111,8 @@ class Invariants:
                 s += event + " " + function + ":\n"
 
                 for var, range in vars.iteritems():
-                    s += "    assert isinstance(" + var + ", " + str(range.type) + ")\n"  # YOUR CODE
+                    s += "    assert isinstance(" + var + ", type(" + str(
+                        range.set[random.randrange(0, len(range.set))]) + ")\n"  # YOUR CODE
                     s += "    assert " + var + " in set(" + str(range.set) + ")\n"
                     s += "    assert "
                     if range.min == range.max:
