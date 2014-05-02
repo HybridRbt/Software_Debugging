@@ -33,8 +33,12 @@ class Range:
     def __init__(self):
         self.min = None  # Minimum value seen
         self.max = None  # Maximum value seen
+
+    def __init__(self, test_set):
+        self.min = None  # Minimum value seen
+        self.max = None  # Maximum value seen
         self.type = None  # Type of variable
-        self.set = set()  # Set of values taken
+        self.set = test_set  # Set of values taken
 
     # Invoke this for every value
     def track(self, value):
